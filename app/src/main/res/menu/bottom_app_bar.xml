@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mealFragment"
+        android:icon="@drawable/ic_baseline_breakfast_dining_24"
+        android:title="식사" />
+    <item
+        android:id="@+id/schoolInformationFragment"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="학교 정보" />
+    <item
+        android:id="@+id/informationFragment"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="학사일정" />
+
+
+
+</menu>
