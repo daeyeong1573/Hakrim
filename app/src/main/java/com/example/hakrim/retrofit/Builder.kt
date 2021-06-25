@@ -12,7 +12,7 @@ object Builder {
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("hub/mealServiceDietInfo")
+            .baseUrl("https://open.neis.go.kr/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(callOkhttp())
             .build()

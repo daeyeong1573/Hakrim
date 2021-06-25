@@ -1,13 +1,15 @@
-package com.example.hakrim
-import androidx.fragment.app.Fragment
+package com.example.hakrim.view.fragment
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.hakrim.databinding.FragmentInformationBinding
+import com.example.hakrim.databinding.FragmentSchoolInformationBinding
 
-class InformationFragment  : Fragment() {
-    private val binding by lazy { FragmentInformationBinding.inflate(layoutInflater) }
+class SchoolInformationFragment  : Fragment() {
+    private val binding by lazy { FragmentSchoolInformationBinding.inflate(layoutInflater) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

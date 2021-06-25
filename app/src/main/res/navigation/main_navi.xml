@@ -8,21 +8,21 @@
 
     <fragment
         android:id="@+id/mealFragment"
-        android:name="com.example.hakrim.MealFragment"
+        android:name="com.example.hakrim.view.fragment.MealFragment"
         tools:layout="@layout/fragment_meal"
         android:label="식사" />
 
     <fragment
         android:id="@+id/informationFragment"
         tools:layout="@layout/fragment_information"
-        android:name="com.example.hakrim.InformationFragment"
+        android:name="com.example.hakrim.view.fragment.InformationFragment"
         android:label="학사일정" />
 
 
     <fragment
         android:id="@+id/schoolInformationFragment"
         tools:layout="@layout/fragment_school_information"
-        android:name="com.example.hakrim.SchoolInformationFragment"
+        android:name="com.example.hakrim.view.fragment.SchoolInformationFragment"
         android:label="학교 정보" />
 
 

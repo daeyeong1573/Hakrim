@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hakrim</string>
+    <string name="special_char1">&lt;</string>
+    <string name="special_char2">&gt;</string>
 </resources>

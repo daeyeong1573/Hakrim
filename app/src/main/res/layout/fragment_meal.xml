@@ -1,112 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="meal"
             type="com.example.hakrim.dto.mealp.Row" />
+
         <variable
-            name="time"
-            type="com.example.hakrim.util.Time" />
+            name="fragment"
+            type="com.example.hakrim.view.fragment.MealFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.hakrim.viewmodel.fragment.MealViewModel" />
     </data>
 
     <LinearLayout
+        android:id="@+id/date_linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#F3D2D2"
             android:orientation="vertical"
-            android:paddingBottom="5sp"
-            android:paddingTop="5sp">
+            android:paddingTop="5sp"
+            android:paddingBottom="5sp">
+
 
             <TextView
                 android:id="@+id/mCalender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:gravity="center"
-                android:text="@={time.stringTime}"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
-        </LinearLayout>
 
-        <ScrollView
+            <TextView
+                android:id="@+id/date_plus"
+                android:layout_width="33dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="30dp"
+                android:onClick="@{fragment::dateChange}"
+                android:text="@string/special_char2"
+                android:textSize="40sp" />
+
+
+            <TextView
+                android:id="@+id/date_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="30dp"
+                android:onClick="@{fragment::dateChange}"
+                android:text="@string/special_char1"
+                android:textSize="40sp" />
+
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <TextView
+                android:id="@+id/breakFast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:onClick="@{fragment::mealSelect}"
+                android:text="아침"
+                android:textSize="30sp"
+                app:layout_constraintRight_toLeftOf="@+id/lunch"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:onClick="@{fragment::mealSelect}"
+                android:text="점심"
+                android:textSize="30sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:onClick="@{fragment::mealSelect}"
+                android:text="저녁"
+                android:textSize="30sp"
+                app:layout_constraintLeft_toRightOf="@+id/lunch"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                app:layout_constraintTop_toBottomOf="@+id/lunch"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:backgroundTint="#95E6F1"
+                app:cardCornerRadius="8dp"
+                android:outlineAmbientShadowColor="@color/black"
+                android:layout_marginTop="50dp"
+                >
 
                 <TextView
-                    android:id="@+id/breakFast"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:text="조식"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mBreak"
-                    android:text="@={meal.DDISH_NM}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/mealMenu"
+                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:textSize="15dp" />
+                    android:layout_gravity="center"
+                    android:textSize="25sp"
+                    />
 
 
-                <TextView
-                    android:id="@+id/lunch"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="70dp"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:text="점심"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mLunch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/dinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="70dp"
-                    android:gravity="center"
-                    android:text="저녁"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mDinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
-                    android:textSize="15dp" />
 
 
-            </LinearLayout>
-        </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+
 </layout>
