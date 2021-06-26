@@ -16,14 +16,14 @@
         android:id="@+id/informationFragment"
         tools:layout="@layout/fragment_information"
         android:name="com.example.hakrim.view.fragment.InformationFragment"
-        android:label="학사일정" />
+        android:label="학교정보" />
 
 
     <fragment
         android:id="@+id/schoolInformationFragment"
         tools:layout="@layout/fragment_school_information"
         android:name="com.example.hakrim.view.fragment.SchoolInformationFragment"
-        android:label="학교 정보" />
+        android:label="학사일정" />
 
 
 </navigation>
