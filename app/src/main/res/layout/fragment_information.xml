@@ -6,7 +6,7 @@
 
         <variable
             name="schoolInformation"
-            type="com.example.hakrim.dto.mealp.schoolinformation.Row" />
+            type="com.example.hakrim.viewmodel.fragment.SchoolInformationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="학교"
+                android:text="@{schoolInformation.schoolName}"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="학교 영어"
+                android:text="@{schoolInformation.schoolEngName}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/school_name_text" />
@@ -59,25 +59,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:text="@{schoolInformation.SD_SCHUL_CODE}" />
+                android:text="@{schoolInformation.schoolCode}" />
 
             <TextView
                 android:id="@+id/school_kinds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{schoolInformation.SCHUL_KND_SC_NM}" />
+                android:text="@{schoolInformation.schoolKind}" />
 
             <TextView
+                android:id="@+id/school_anniversary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="@{schoolInformation.HMPG_ADRES}" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{schoolInformation.FOAS_MEMRD}" />
+                android:text="@{schoolInformation.schoolAnniversary}" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,24 +84,18 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
 
             <TextView
+
+                android:id="@+id/school_road_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="도로명" />
+                android:text="@{schoolInformation.schoolRoadAddress" />
 
             <TextView
+                android:id="@+id/school_post_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="우편주소" />
+                android:text="@{schoolInformation.schoolPost}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="도로명주소" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="우편주소" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,19 +107,22 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <TextView
+                android:id="@+id/school_homepage_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="홈페이지" />
+                android:text="@{schoolInformation.schoolHomePage}" />
 
             <TextView
+                android:id="@+id/school_phone_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전화번호" />
+                android:text="@{schoolInformation.schoolPhoneNumber}" />
 
             <TextView
+                android:id="@+id/school_fax_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="홈페이지" />
+                android:text="@{schoolInformation.schoolFaxNumber}" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
