@@ -57,7 +57,7 @@ class MealFragment : Fragment() {
         })
 
         mealViewModel.meal.observe(viewLifecycleOwner, Observer { it ->
-            binding.mealMenu.text = it.filter { it in '가'..'힣' || it =='&' || it == '<'}.replace("<","\n")
+            binding.mealMenu.text = it.filter { it in '가'..'힣' || it =='&' || it == '<' || it == ' '}.replace("<","\n")
         })
 
         mealSelect(binding.breakFast)
