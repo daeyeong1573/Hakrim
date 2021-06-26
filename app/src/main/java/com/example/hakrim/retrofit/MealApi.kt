@@ -21,7 +21,7 @@ interface MealApi {
     ): retrofit2.Call<Meal>
 
 
-    @GET("hub/mealServiceDietInfo")
+    @GET("hub/schoolInfo")
     fun schoolInformation(
         @Query("Key") key: String = "",
         @Query("Type") type: String = "json",
