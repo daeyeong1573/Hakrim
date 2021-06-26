@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.dto.mealp.schoolinformation.SchoolInformation
 import com.example.hakrim.retrofit.Builder
+import com.example.hakrim.viewmodel.fragment.MealViewModel.Companion.TAG
 import retrofit2.Call
 import retrofit2.Response
 
@@ -49,19 +50,27 @@ class SchoolInformationViewModel(application: Application) : AndroidViewModel(ap
     fun schoolInformationShow() {
         Builder.mealApi.schoolInformation().enqueue(object : retrofit2.Callback<SchoolInformation> {
             override fun onResponse(call: Call<SchoolInformation>, response: Response<SchoolInformation>) {
-                val res = response.body()!!.schoolInfo[0].row
-                if (response.isSuccessful) {
+                try {
+                    val res = response.body()!!.schoolInfo[1].row
+                    if (response.isSuccessful) {
 
-                    _schoolName.value=res[0].SCHUL_NM
-                    _schoolEngName.value=res[0].ENG_SCHUL_NM
-                    _schoolCode.value=res[0].SD_SCHUL_CODE
-                    _schoolKind.value=res[0].SCHUL_KND_SC_NM
-                    _schoolHomePage.value=res[0].HMPG_ADRES
-                    _schoolAnniversary.value=res[0].FOAS_MEMRD
-                    _schoolRoadAddress.value=res[0].ORG_RDNMA
-                    _schoolPost.value=res[0].ORG_RDNZC
-                    _schoolPhoneNumber.value=res[0].ORG_TELNO
-                    _schoolFaxNumber.value=res[0].ORG_FAXNO
+                        Log.d(TAG, "onResponse: $res")
+
+                        _schoolName.value = res[0].SCHUL_NM
+                        _schoolEngName.value = res[0].ENG_SCHUL_NM
+                        _schoolCode.value = res[0].SD_SCHUL_CODE
+                        _schoolKind.value = res[0].SCHUL_KND_SC_NM
+                        _schoolHomePage.value = res[0].HMPG_ADRES
+                        _schoolAnniversary.value = res[0].FOAS_MEMRD
+                        _schoolRoadAddress.value = res[0].ORG_RDNMA
+                        _schoolPost.value = res[0].ORG_RDNZC
+                        _schoolPhoneNumber.value = res[0].ORG_TELNO
+                        _schoolFaxNumber.value = res[0].ORG_FAXNO
+                    }
+                }catch (e:NullPointerException){
+
+                    Log.d(TAG, "onResponse: error ")
+
                 }
             }
 
