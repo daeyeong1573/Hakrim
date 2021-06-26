@@ -12,18 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hakrim.R
-import com.example.hakrim.base.BaseFragment
 import com.example.hakrim.databinding.FragmentInformationBinding
 import com.example.hakrim.databinding.FragmentMealBinding
 import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.util.Time
-import com.example.hakrim.view.dialog.CalendarDialog
 import com.example.hakrim.viewmodel.fragment.ActionType
 import com.example.hakrim.viewmodel.fragment.MealViewModel
-import java.lang.reflect.Array.get
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.properties.Delegates
 
 class MealFragment : Fragment() {
     companion object {
@@ -60,7 +54,8 @@ class MealFragment : Fragment() {
             binding.mealMenu.text = it.filter { it in '가'..'힣' || it =='&' || it == '<'}.replace("<","\n")
         })
 
-        mealSelect(binding.breakFast)
+
+//        mealSelect(binding.breakFast)
     }
 
 
@@ -79,6 +74,8 @@ class MealFragment : Fragment() {
 
     }
 
+
+
     fun mealSelect(view: View) {
         mealViewModel.date.observe(viewLifecycleOwner, Observer {
             var time = Time(it)
@@ -96,5 +93,6 @@ class MealFragment : Fragment() {
             }
         })
     }
+
 }
 
