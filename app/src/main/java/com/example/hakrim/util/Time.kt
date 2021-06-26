@@ -15,6 +15,9 @@ class Time(now:Long) {
     val date = Date(now) // 현재시간을 Date에 저장한다
     val dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR")).format(date)
     val dateFormat2 = SimpleDateFormat("yyyy년 MM월 dd일 \nEE요일", Locale("ko", "KR")).format(date)
+
+    val dateFormat4 = SimpleDateFormat("MM월", Locale("ko", "KR")).format(date)
+
     val stringTime = dateFormat2.format(date)
 
 

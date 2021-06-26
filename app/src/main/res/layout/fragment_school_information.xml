@@ -1,18 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="학교 정보"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="40sp"
-        />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="viewModel"
+            type="com.example.hakrim.viewmodel.fragment.SchoolScheduleViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.example.hakrim.view.fragment.SchoolInformationFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F3D2D2"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/mCalender"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:text="1월"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:focusable="true" />
+
+
+            <TextView
+                android:id="@+id/date_plus"
+                android:layout_width="33dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="30dp"
+                android:onClick="@{fragment::dateChange}"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:text="@string/special_char2"
+                android:textSize="40sp" />
+
+
+            <TextView
+                android:id="@+id/date_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="30dp"
+                android:onClick="@{fragment::dateChange}"
+                android:layout_marginRight="30dp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:text="@string/special_char1"
+                android:textSize="40sp" />
+
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/schedule_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+            tools:listitem="@layout/school_schedule_row" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
