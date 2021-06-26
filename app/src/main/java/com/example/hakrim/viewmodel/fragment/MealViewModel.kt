@@ -10,6 +10,7 @@ import com.example.hakrim.retrofit.Builder
 import com.example.hakrim.util.Time
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.NullPointerException
 import java.util.*
 import javax.security.auth.callback.Callback
 
@@ -28,7 +29,7 @@ open class MealViewModel : ViewModel() {
     val date: LiveData<Long>
         get() = _date
 
-    val meal : LiveData<String>
+    val meal: LiveData<String>
         get() = _meal
 
     val time = Time(System.currentTimeMillis())
@@ -50,13 +51,17 @@ open class MealViewModel : ViewModel() {
     fun mealShow(day: String, sc_code: Int) {
         Builder.mealApi.MealService(day, sc_code).enqueue(object : retrofit2.Callback<Meal> {
             override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
-                val res = response.body()!!.mealServiceDietInfo[1].row
-                if (response.isSuccessful) {
-                    for (i in res.indices) {
-                        val obj = res[i]
-                        _meal.postValue(obj.DDISH_NM)
-                        Log.d(TAG, "onResponse: ${meal}")
+                try {
+                    val mres = response.body()!!.mealServiceDietInfo[1].row
+                    if (response.isSuccessful) {
+                        for (i in mres.indices) {
+                            val obj = mres[i]
+                            _meal.postValue(obj.DDISH_NM)
+                            Log.d(TAG, "onResponse: ${meal}")
+                        }
                     }
+                }catch (e : NullPointerException){
+                    _meal.postValue("급식 정보가 없습니다.")
                 }
             }
 
