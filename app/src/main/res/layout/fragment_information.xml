@@ -14,7 +14,8 @@
         android:layout_height="match_parent">
 
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
+
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
 
             <TextView
                 android:id="@+id/school_name_text"
@@ -42,87 +44,168 @@
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/school_name_text" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="표준학교 코드" />
 
             <TextView
                 android:id="@+id/school_code_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="@{schoolInformation.schoolCode}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-                android:text="@{schoolInformation.schoolCode}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="학교종류명" />
 
             <TextView
                 android:id="@+id/school_kinds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{schoolInformation.schoolKind}" />
+                android:text="@{schoolInformation.schoolKind}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="학교 개교기념일" />
 
             <TextView
                 android:id="@+id/school_anniversary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolAnniversary}" />
+                android:text="@{schoolInformation.schoolAnniversary}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="도로명주소" />
+
+            <TextView
 
                 android:id="@+id/school_road_text"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolRoadAddress" />
+                android:text="@{schoolInformation.schoolRoadAddress}"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="도로명 우편주소" />
 
             <TextView
                 android:id="@+id/school_post_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolPost}" />
+                android:layout_gravity="center"
+                android:text="@{schoolInformation.schoolPost}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="홈페이지" />
+
             <TextView
                 android:id="@+id/school_homepage_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolHomePage}" />
+                android:linksClickable="true"
+                android:autoLink="web"
+
+                android:text="@{schoolInformation.schoolHomePage}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="전화번호" />
 
             <TextView
                 android:id="@+id/school_phone_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolPhoneNumber}" />
+                android:layout_gravity="center"
+                android:text="@{schoolInformation.schoolPhoneNumber}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="팩스번호" />
 
             <TextView
                 android:id="@+id/school_fax_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{schoolInformation.schoolFaxNumber}" />
+                android:layout_gravity="center"
+                android:text="@{schoolInformation.schoolFaxNumber}"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
