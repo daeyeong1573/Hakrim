@@ -3,6 +3,7 @@ package com.example.hakrim.retrofit
 import android.telecom.Call
 import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.dto.mealp.schoolinformation.SchoolInformation
+import com.example.hakrim.dto.mealp.schoolschedule.SchoolSchedule
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -29,7 +30,19 @@ interface MealApi {
         @Query("SD_SCHUL_CODE") school: Int = 7380292,
         @Query("pIndex") index: Int = 1,
         @Query("pSize") size: Int = 100,
-    ) : retrofit2.Call<SchoolInformation>
+    ): retrofit2.Call<SchoolInformation>
+
+    @GET("hub/SchoolSchedule")
+    fun schoolSchedule(
+        @Query("Key") key: String = "",
+        @Query("Type") type: String = "json",
+        @Query("ATPT_OFCDC_SC_CODE") region: String = "F10",
+        @Query("SD_SCHUL_CODE") school: Int = 7380292,
+        @Query("pIndex") index: Int = 1,
+        @Query("pSize") size: Int = 100,
+        @Query("AA_FROM_YMD") scheduleStart: String,
+
+    ): retrofit2.Call<SchoolSchedule>
 
 }
 
