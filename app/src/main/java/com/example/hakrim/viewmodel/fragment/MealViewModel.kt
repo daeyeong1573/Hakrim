@@ -1,24 +1,24 @@
 package com.example.hakrim.viewmodel.fragment
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.retrofit.Builder
+import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.util.Time
+import org.koin.core.Koin
+import org.koin.dsl.module
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.NullPointerException
-import java.util.*
-import javax.security.auth.callback.Callback
 
 enum class ActionType {
     PLUS, MINUS, SH
 }
 
-open class MealViewModel : ViewModel() {
+open class MealViewModel(private val service: MealApi) : ViewModel() {
     companion object {
         val TAG: String = "로그"
     }
@@ -49,18 +49,14 @@ open class MealViewModel : ViewModel() {
     }
 
     fun mealShow(day: String, sc_code: Int) {
-        Builder.mealApi.MealService(day, sc_code).enqueue(object : retrofit2.Callback<Meal> {
+        service.MealService(day, sc_code).enqueue(object : retrofit2.Callback<Meal> {
             override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
                 try {
                     val mres = response.body()!!.mealServiceDietInfo[1].row
                     if (response.isSuccessful) {
-                        for (i in mres.indices) {
-                            val obj = mres[i]
-                            _meal.postValue(obj.DDISH_NM)
-                            Log.d(TAG, "onResponse: ${meal}")
-                        }
+                        _meal.value = mres[0].DDISH_NM
                     }
-                }catch (e : NullPointerException){
+                } catch (e: NullPointerException) {
                     _meal.postValue("급식 정보가 없습니다.")
                 }
             }
@@ -71,6 +67,7 @@ open class MealViewModel : ViewModel() {
 
         })
     }
+
 
 
 }

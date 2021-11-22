@@ -1,18 +1,19 @@
 package com.example.hakrim.viewmodel.fragment
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.hakrim.dto.mealp.Meal
-import com.example.hakrim.dto.mealp.schoolinformation.SchoolInformation
+import androidx.lifecycle.ViewModel
+import com.example.hakrim.dto.schoolinformation.SchoolInformation
 import com.example.hakrim.retrofit.Builder
+import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.viewmodel.fragment.MealViewModel.Companion.TAG
+import org.koin.core.Koin
 import retrofit2.Call
 import retrofit2.Response
 
-class SchoolInformationViewModel(application: Application) : AndroidViewModel(application) {
+class SchoolInformationViewModel(private val service : MealApi) : ViewModel()  {
 
 
     private val _schoolName = MutableLiveData<String>()
@@ -48,14 +49,12 @@ class SchoolInformationViewModel(application: Application) : AndroidViewModel(ap
         get() = _schoolFaxNumber
 
     fun schoolInformationShow() {
-        Builder.mealApi.schoolInformation().enqueue(object : retrofit2.Callback<SchoolInformation> {
+        service.schoolInformation().enqueue(object : retrofit2.Callback<SchoolInformation> {
             override fun onResponse(call: Call<SchoolInformation>, response: Response<SchoolInformation>) {
                 try {
                     val res = response.body()!!.schoolInfo[1].row
                     if (response.isSuccessful) {
-
                         Log.d(TAG, "onResponse: $res")
-
                         _schoolName.value = res[0].SCHUL_NM
                         _schoolEngName.value = res[0].ENG_SCHUL_NM
                         _schoolCode.value = res[0].SD_SCHUL_CODE

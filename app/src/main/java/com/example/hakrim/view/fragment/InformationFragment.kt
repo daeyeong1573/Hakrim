@@ -12,10 +12,11 @@ import com.example.hakrim.databinding.FragmentInformationBinding
 import com.example.hakrim.databinding.FragmentMealBinding
 import com.example.hakrim.viewmodel.fragment.MealViewModel
 import com.example.hakrim.viewmodel.fragment.SchoolInformationViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InformationFragment : Fragment() {
     lateinit var binding: FragmentInformationBinding
-    private val viewModel: SchoolInformationViewModel by viewModels()
+    private val viewModel: SchoolInformationViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

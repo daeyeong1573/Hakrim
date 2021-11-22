@@ -12,12 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hakrim.R
-import com.example.hakrim.databinding.FragmentInformationBinding
 import com.example.hakrim.databinding.FragmentMealBinding
 import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.util.Time
 import com.example.hakrim.viewmodel.fragment.ActionType
 import com.example.hakrim.viewmodel.fragment.MealViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MealFragment : Fragment() {
     companion object {
@@ -25,7 +25,7 @@ class MealFragment : Fragment() {
     }
 
     lateinit var binding: FragmentMealBinding
-    private val mealViewModel: MealViewModel by viewModels()
+    val mealViewModel: MealViewModel by viewModel()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,7 +33,6 @@ class MealFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meal, container, false)
-        binding.viewModel = MealViewModel()
         binding.fragment = this
         binding.lifecycleOwner = this
 
@@ -55,7 +54,6 @@ class MealFragment : Fragment() {
         })
 
 
-//        mealSelect(binding.breakFast)
     }
 
 
@@ -90,7 +88,9 @@ class MealFragment : Fragment() {
                 binding.dinner -> {
                     mealViewModel.mealShow(day = "${time.dateFormat}", sc_code = 3)
                 }
+                else -> Log.d(TAG, "mealSelect: asd")
             }
+
         })
     }
 

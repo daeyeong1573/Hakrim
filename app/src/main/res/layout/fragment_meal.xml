@@ -5,16 +5,10 @@
     <data>
 
         <variable
-            name="meal"
-            type="com.example.hakrim.dto.mealp.Row" />
-
-        <variable
             name="fragment"
             type="com.example.hakrim.view.fragment.MealFragment" />
 
-        <variable
-            name="viewModel"
-            type="com.example.hakrim.viewmodel.fragment.MealViewModel" />
+
     </data>
 
     <LinearLayout
@@ -26,7 +20,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F3D2D2"
+            android:background="#88BFD8"
             android:orientation="vertical"
             android:paddingTop="5sp"
             android:paddingBottom="5sp">
@@ -81,10 +75,9 @@
                 android:onClick="@{fragment::mealSelect}"
                 android:text="아침"
                 android:textSize="30sp"
-                app:layout_constraintRight_toLeftOf="@+id/lunch"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintRight_toLeftOf="@+id/lunch"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lunch"
@@ -113,34 +106,25 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="300dp"
                 android:layout_height="250dp"
-                app:layout_constraintTop_toBottomOf="@+id/lunch"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#DBCBF8"
+                android:outlineAmbientShadowColor="@color/black"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:backgroundTint="#95E6F1"
-                app:cardCornerRadius="8dp"
-                android:outlineAmbientShadowColor="@color/black"
-                android:layout_marginTop="50dp"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/lunch">
 
                 <TextView
+                    android:id="@+id/mealMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mealMenu"
-                    android:textColor="@color/black"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:textSize="25sp"
-                    />
-
-
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
 
 
             </androidx.cardview.widget.CardView>
-
-
-
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

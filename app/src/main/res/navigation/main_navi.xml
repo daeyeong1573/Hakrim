@@ -21,8 +21,8 @@
 
     <fragment
         android:id="@+id/schoolInformationFragment"
-        tools:layout="@layout/fragment_school_information"
-        android:name="com.example.hakrim.view.fragment.SchoolInformationFragment"
+        tools:layout="@layout/fragment_school_sch"
+        android:name="com.example.hakrim.view.fragment.SchoolSchFragment"
         android:label="학사일정" />
 
 
