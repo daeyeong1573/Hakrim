@@ -1,24 +1,18 @@
 package com.example.hakrim.di
 
 import com.example.hakrim.BuildConfig
-import com.example.hakrim.dto.mealp.Meal
 import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.viewmodel.fragment.MealViewModel
 import com.example.hakrim.viewmodel.fragment.SchoolInformationViewModel
 import com.example.hakrim.viewmodel.fragment.SchoolScheduleViewModel
-import com.example.hakrim.widget.MyApplication
-import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.context.KoinContextHandler
-import org.koin.core.context.KoinContextHandler.get
-import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 var retrofitModule = module {
     single { okHttp() }
@@ -26,6 +20,7 @@ var retrofitModule = module {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(get())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

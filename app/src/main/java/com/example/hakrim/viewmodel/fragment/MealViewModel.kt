@@ -5,11 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hakrim.dto.mealp.Meal
-import com.example.hakrim.retrofit.Builder
 import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.util.Time
-import org.koin.core.Koin
-import org.koin.dsl.module
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.NullPointerException
@@ -48,25 +47,41 @@ open class MealViewModel(private val service: MealApi) : ViewModel() {
         }
     }
 
-    fun mealShow(day: String, sc_code: Int) {
-        service.MealService(day, sc_code).enqueue(object : retrofit2.Callback<Meal> {
-            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
+    fun mealShow(day:String,sc_code:Int){
+        service.MealService(day,sc_code)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ items->
                 try {
-                    val mres = response.body()!!.mealServiceDietInfo[1].row
-                    if (response.isSuccessful) {
-                        _meal.value = mres[0].DDISH_NM
-                    }
-                } catch (e: NullPointerException) {
-                    _meal.postValue("급식 정보가 없습니다.")
+                  val item = items.mealServiceDietInfo[1].row
+                    _meal.value = item[0].DDISH_NM
+                }catch(e: Exception){
+                    _meal.postValue("급식정보가 없습니다.")
                 }
-            }
-
-            override fun onFailure(call: Call<Meal>, t: Throwable) {
-                Log.d(TAG, "onFailure: $t")
-            }
-
-        })
+            },{e->
+                _meal.postValue(e.toString())
+            })
     }
+
+//    fun mealShow(day: String, sc_code: Int) {
+//        service.MealService(day, sc_code).enqueue(object : retrofit2.Callback<Meal> {
+//            override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
+//                try {
+//                    val mres = response.body()!!.mealServiceDietInfo[1].row
+//                    if (response.isSuccessful) {
+//                        _meal.value = mres[0].DDISH_NM
+//                    }
+//                } catch (e: NullPointerException) {
+//                    _meal.postValue("급식 정보가 없습니다.")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Meal>, t: Throwable) {
+//                Log.d(TAG, "onFailure: $t")
+//            }
+//
+//        })
+//    }
 
 
 
