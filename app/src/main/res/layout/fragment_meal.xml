@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="fragment"
+            name="fragmaent"
             type="com.example.hakrim.view.fragment.MealFragment" />
 
 
