@@ -1,6 +1,8 @@
 package com.example.hakrim.di
 
 import com.example.hakrim.BuildConfig
+import com.example.hakrim.adpater.RecyclerAdapter
+import com.example.hakrim.repository.MainRepository
 import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.viewmodel.fragment.MealViewModel
 import com.example.hakrim.viewmodel.fragment.SchoolInformationViewModel
@@ -38,6 +40,17 @@ var viewModelPart = module {
     viewModel { SchoolScheduleViewModel(get()) }
 }
 
+var repositoryMoudule = module {
+    single {
+        MainRepository(get())
+    }
+}
+
+var adapterPart = module {
+    factory {
+        RecyclerAdapter(get())
+    }
+}
 
 private val requestBodyLoggerInterceptor: Interceptor
     get() = HttpLoggingInterceptor().apply {
@@ -58,4 +71,4 @@ private fun okHttp() = OkHttpClient.Builder()
     .build()
 
 
-val myModule = listOf(retrofitModule, viewModelPart)
+val myModule = listOf(retrofitModule, viewModelPart, repositoryMoudule, adapterPart)

@@ -40,8 +40,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures { //viewbinding
-        viewBinding = true
+    buildFeatures {
         dataBinding  true
     }
 }
@@ -59,6 +58,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    
     //calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
 
