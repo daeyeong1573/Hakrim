@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hakrim.dto.schoolinformation.SchoolInformation
+import com.example.hakrim.repository.MainRepository
 import com.example.hakrim.retrofit.Builder
 import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.viewmodel.fragment.MealViewModel.Companion.TAG
@@ -15,7 +16,7 @@ import org.koin.core.Koin
 import retrofit2.Call
 import retrofit2.Response
 
-class SchoolInformationViewModel(private val service: MealApi) : ViewModel() {
+class SchoolInformationViewModel(private val repository: MainRepository) : ViewModel() {
 
 
     private val _schoolName = MutableLiveData<String>()
@@ -51,7 +52,7 @@ class SchoolInformationViewModel(private val service: MealApi) : ViewModel() {
         get() = _schoolFaxNumber
 
     fun schoolInformationShow() {
-        service.schoolInformation()
+        repository.getInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ items ->

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hakrim.dto.mealp.Meal
+import com.example.hakrim.repository.MainRepository
 import com.example.hakrim.retrofit.MealApi
 import com.example.hakrim.util.Time
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +18,7 @@ enum class ActionType {
     PLUS, MINUS, SH
 }
 
-open class MealViewModel(private val service: MealApi) : ViewModel() {
+open class MealViewModel(private val repository: MainRepository) : ViewModel() {
     companion object {
         val TAG: String = "로그"
     }
@@ -48,7 +49,7 @@ open class MealViewModel(private val service: MealApi) : ViewModel() {
     }
 
     fun mealShow(day:String,sc_code:Int){
-        service.MealService(day,sc_code)
+        repository.getMeal(day,sc_code)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ items->
