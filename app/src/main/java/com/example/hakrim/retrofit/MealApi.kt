@@ -41,8 +41,6 @@ interface  MealApi {
         @Query("pIndex") index: Int = 1,
         @Query("pSize") size: Int = 100,
         @Query("AA_FROM_YMD") scheduleStart: String,
-
         ): Single<SchoolSchedule>
-
 }
 
