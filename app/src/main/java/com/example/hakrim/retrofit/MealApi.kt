@@ -39,7 +39,7 @@ interface  MealApi {
         @Query("ATPT_OFCDC_SC_CODE") region: String = "F10",
         @Query("SD_SCHUL_CODE") school: Int = 7380292,
         @Query("pIndex") index: Int = 1,
-        @Query("pSize") size: Int = 100,
+        @Query("pSize") size: Int = 30,
         @Query("AA_FROM_YMD") scheduleStart: String,
         ): Single<SchoolSchedule>
 }

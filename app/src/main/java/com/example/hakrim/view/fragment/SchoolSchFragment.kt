@@ -12,12 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hakrim.R
 import com.example.hakrim.databinding.FragmentSchoolSchBinding
-import com.example.hakrim.dto.schoolschedule.Row
 import com.example.hakrim.util.Time
 import com.example.hakrim.viewmodel.fragment.ActionType
 import com.example.hakrim.viewmodel.fragment.SchoolScheduleViewModel
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SchoolSchFragment : Fragment() {
     lateinit var binding: FragmentSchoolSchBinding
@@ -34,25 +32,20 @@ class SchoolSchFragment : Fragment() {
                 container,
                 false
         )
-        binding.lifecycleOwner = this
-        binding.viewModel = scheduleViewModel
-        binding.fragment = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this@SchoolSchFragment
+        binding.viewModel = scheduleViewModel
+        binding.lifecycleOwner = this
 
         scheduleViewModel.date.observe(viewLifecycleOwner, Observer {
             var time = Time(it)
             Log.d(MealFragment.TAG, "onViewCreated: ${time.dateFormat4}")
             binding.mCalender.text = time.dateFormat4
             scheduleViewModel.showSch("${time.dateFormat}")
-            scheduleViewModel.schRepositorys.observe(viewLifecycleOwner, Observer {
-                val adapter = RecyclerAdapter(it)
-                binding.scheduleRecycler.adapter = adapter
-
-            })
         })
 
 

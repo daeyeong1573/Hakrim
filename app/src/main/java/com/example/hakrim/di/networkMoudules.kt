@@ -45,12 +45,12 @@ var repositoryMoudule = module {
         MainRepository(get())
     }
 }
-
-var adapterPart = module {
-    factory {
-        RecyclerAdapter(get())
-    }
-}
+//
+//var adapterPart = module {
+//    factory {
+//        RecyclerAdapter(get())
+//    }
+//}
 
 private val requestBodyLoggerInterceptor: Interceptor
     get() = HttpLoggingInterceptor().apply {
@@ -71,4 +71,4 @@ private fun okHttp() = OkHttpClient.Builder()
     .build()
 
 
-val myModule = listOf(retrofitModule, viewModelPart, repositoryMoudule, adapterPart)
+val myModule = listOf(retrofitModule, viewModelPart, repositoryMoudule)

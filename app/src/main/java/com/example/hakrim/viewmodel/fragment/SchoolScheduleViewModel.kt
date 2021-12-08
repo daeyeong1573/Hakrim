@@ -6,69 +6,57 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hakrim.dto.schoolschedule.Row
-import com.example.hakrim.dto.schoolschedule.SchoolSchedule
-import com.example.hakrim.retrofit.Builder
-import com.example.hakrim.retrofit.MealApi
+import com.example.hakrim.repository.MainRepository
 import com.example.hakrim.util.Time
 import com.example.hakrim.viewmodel.fragment.MealViewModel.Companion.TAG
-import org.koin.core.Koin
-import retrofit2.Call
-import retrofit2.Response
-import java.lang.NullPointerException
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-class SchoolScheduleViewModel(private val schApi: MealApi) : ViewModel() {
+
+class SchoolScheduleViewModel(private val schRepostiroy : MainRepository) : ViewModel() {
+
+    val schList = ObservableArrayList<Row>()
 
     private val _date = MutableLiveData<Long>()
-    private val _sch = ObservableArrayList<Row>()
-    val time = Time(System.currentTimeMillis())
-
-
     val date: LiveData<Long>
         get() = _date
 
-    val sch: ObservableArrayList<Row>
-        get() = _sch
+    val time = Time(System.currentTimeMillis())
 
     init {
         _date.value = time.now
     }
 
+
     fun changeDate(actionType: ActionType, int: Long) {
         when (actionType) {
             ActionType.PLUS -> {
                 _date.value = _date.value?.plus(int)
+                schList.clear()
                 Log.d(TAG, "changeDatePlus: ${_date.value}")
             }
             ActionType.MINUS -> {
                 _date.value = _date.value?.minus(int)
+                schList.clear()
                 Log.d(TAG, "changeDateMinus: ${_date.value}")
             }
         }
     }
 
     fun showSch(day: String){
-        schApi.schoolSchedule(scheduleStart = day).enqueue(object :
-            retrofit2.Callback<SchoolSchedule> {
-            override fun onResponse(
-                call: Call<SchoolSchedule>,
-                response: Response<SchoolSchedule>
-            ) {
+        schRepostiroy.getSch(day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
                 try {
-                    val res = response.body()!!.SchoolSchedule[1].row
-                    if (response.isSuccessful) {
-                        for(i in res.indices)
-                        _sch.add(Row(res[i].AA_YMD,res[1].EVENT_NM))
-                    }
-                } catch (e: NullPointerException) {
+                    val item = it.SchoolSchedule[1].row
+                    schList.addAll(item)
+                }catch(e: Exception){
+                  schList.add(Row("","데이터 정보가 없습니다."))
                 }
-            }
-
-            override fun onFailure(call: Call<SchoolSchedule>, t: Throwable) {
-                Log.d(TAG, "onFailure: $t")
-            }
-
-        })
-
+            },{ e->
+                Log.d(TAG, "showSchErr : ${e.message}")
+            })
     }
 
 
